@@ -1,6 +1,6 @@
 package Objects;
 
-public class Bin extends Station{
+public class Bin{
 
     public Bin(){
 

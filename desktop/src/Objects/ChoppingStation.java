@@ -2,7 +2,7 @@ package Objects;
 
 import java.util.Arrays;
 
-public class ChoppingStation extends Station{
+public class ChoppingStation{
     
     public ChoppingStation (){
 

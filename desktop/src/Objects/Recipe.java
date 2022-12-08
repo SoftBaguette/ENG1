@@ -8,4 +8,6 @@ public class Recipe {
         this.recipe_name = recipe_name;
         this.ingredients = ingredients;
     }
+
+
 }
