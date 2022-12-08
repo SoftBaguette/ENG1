@@ -6,7 +6,9 @@ public class Bin extends Station{
 
     }
 
+    // Pops item on chefs stack
     public void Interact(Chef chef){
+        // Can only pop if there is something in the stack
         if (chef.stack.isEmpty()){
             System.out.println("No FOOOD");
         }
