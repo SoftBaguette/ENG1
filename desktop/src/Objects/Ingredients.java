@@ -1,6 +1,8 @@
 package Objects;
 
-public class Ingredients {
+
+
+public class Ingredients extends GameObject{
     Item ingredient;
 
     public Ingredients(Item ingredient){

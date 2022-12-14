@@ -1,10 +1,18 @@
 package Objects;
 
 public class AssemblyStation extends Station{
+    
     Item[] items_on_station;
     int pointer;
-    public AssemblyStation (){
-        super(type);
+
+    public AssemblyStation(int x, int y, int width, int height, String type) {
+        super(x, y, width, height, type);
+        items_on_station = new Item[10];
+        pointer = 0;
+    }
+
+    public AssemblyStation() {
+        super();
         items_on_station = new Item[10];
         pointer = 0;
     }
@@ -51,9 +59,11 @@ public class AssemblyStation extends Station{
         }
     }
 
+    //Test case
     public static void main(String[] args) {
-        Chef chef1 = new Chef(5,5,1);
-        //chef1.stack.push(new Item("Onion", ""));
+        // Initialising the chef, ingredients, a chopping station, 
+        // assembly station and recipe (in this case a salad)
+        Chef chef1 = new Chef(5,5,5,5);
         Ingredients tomatoe_box = new Ingredients(new Item("Tomatoe", ""));
         Ingredients lettuce_box = new Ingredients(new Item("Lettuce", ""));
         Ingredients onion_box = new Ingredients(new Item("Onion", ""));
@@ -61,15 +71,20 @@ public class AssemblyStation extends Station{
         AssemblyStation assemblyStation = new AssemblyStation();
         Item[] salad_ingredients = {new Item("Tomatoe", "Chopped"),new Item("Lettuce", "Chopped"),new Item("Onion", "Chopped")};
         Recipe salad = new Recipe("Salad", salad_ingredients);
+        // Get all the ingredients
         tomatoe_box.interact(chef1);
         lettuce_box.interact(chef1);
         onion_box.interact(chef1);
+        // Chop the top item on the stack and then add to assembly station
+        // Repeat till the stack is empty
         chop1.interact(chef1);
         assemblyStation.interact(salad, chef1);
         chop1.interact(chef1);
         assemblyStation.interact(salad, chef1);
         chop1.interact(chef1);
+        // Assemble the salad
         assemblyStation.interact(salad, chef1);
+        
         
         
 
