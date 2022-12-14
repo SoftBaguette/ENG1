@@ -49,9 +49,9 @@ public class Stack {
 
     // display elements of stack
     public void printStack(){
-        System.out.print( "\n");
+        System.out.print( "\n Items: ");
         for (int i = 0; i <= top; i++) {
-            System.out.print((arr[i].name + ", "+ arr[i].status) + ", ");
+            System.out.print("(" + arr[i].name + ", "+ arr[i].status+")" + ", ");
         }
     }
 
