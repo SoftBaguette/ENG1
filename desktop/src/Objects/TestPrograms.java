@@ -16,6 +16,78 @@ public class TestPrograms {
     public TestPrograms(){
 
     }
+
+    public void large_scale_test(){
+        Chef chef1 = new Chef(0, 0, 10, 10);
+        Chef chef2 = new Chef(100, 0, 10, 10);
+        Chef chef3 = new Chef(200, 0, 10, 10); 
+        Chef[] chefs = {chef1, chef2, chef3};
+
+        // Salad Items
+        Item onion = new Item("Onion", "");
+        Item tomato = new Item("Tomato", "");
+        Item lettuce = new Item("Lettuce", "");
+        Item[] salad_ingredients = {new Item("Tomato", "Chopped"),new Item("Lettuce", "Chopped"),new Item("Onion", "Chopped")};
+        Recipe salad = new Recipe("Salad", salad_ingredients);
+
+        // Burger Items
+        Item burger_meat = new Item("Burger Meat", "");
+        Item burger_bun = new Item("Burger Bun", "");
+        Item[] burger_ingredients = {new Item("Burger Meat", "Cooked"),new Item("Burger Bun", "Toasted"),};
+        Recipe burger = new Recipe("Burger", burger_ingredients);
+        
+        Ingredient_source tomato_box = new Ingredient_source(20, 0, 10, 10, null, 0,tomato);
+        Ingredient_source lettuce_box = new Ingredient_source(50, 0, 10, 10, null, 0,lettuce);
+        Ingredient_source onion_box = new Ingredient_source(80, 0, 10, 10, null, 0,onion);
+
+        Ingredient_source burger_meat_box = new Ingredient_source(110, 0, 10, 10, null, 0,burger_meat);
+        Ingredient_source burger_bun_box = new Ingredient_source(140, 0, 10, 10, null, 0, burger_bun);
+
+        Recipe[] recipes = {salad, burger};
+        int current_recipe = 0;
+
+        Station chopping_station = new Station(20,50,10,10, "Chopping", 2);
+        Station toasting_station = new Station(50,50,10,10, "Toaster", 2);
+        Station hob_station = new Station(80,50,10,10, "Hob", 2);
+        Station bin = new Station(110,0,50,10, "Bin", 2);
+        Station assembly_station = new Station(140,50,10,10, "Assembly", 2);
+
+        Station[] stations = {tomato_box, lettuce_box, onion_box, burger_meat_box, burger_bun_box, chopping_station, toasting_station, hob_station, bin, assembly_station};
+
+        chef1.stack.push(new Item("Onion", "Chopped"));
+        chef1.stack.push(new Item("Lettuce", "Chopped"));
+        chef1.stack.push(new Item("Tomato", "Chopped"));
+        boolean cooked = false;
+        while (cooked == false){
+            Scanner myObj = new Scanner(System.in);
+            System.out.println("Chef x");
+            int new_x = Integer.parseInt(myObj.nextLine()) ;
+            System.out.println("Chef y");
+            int new_y = Integer.parseInt(myObj.nextLine());
+
+            chef1.move(new_x, new_y);
+
+            for (Station station : stations) {
+                station.update();
+                if (chef1.check_hitbox(station)){
+                    System.out.println("Interact");
+                    if (Integer.parseInt(myObj.nextLine()) == 1){
+                        station.interact(chef1, recipes[current_recipe]);
+                        System.out.println("Interacted");
+                        if (station.assembled == true){
+                            current_recipe += 1;
+                            System.out.println("Increased" +current_recipe);
+                        }
+                        //chef1.stack.printStack();
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    /* 
     // @Test
     public void testSalad() {
         // Initialise objects
@@ -208,9 +280,10 @@ public class TestPrograms {
 
         }
 
-    }
+    }*/
     public static void main(String[] args) {
         TestPrograms test = new TestPrograms();
-        test.testSalad2();
+        //test.testSalad2();
+        test.large_scale_test();
     }
 }

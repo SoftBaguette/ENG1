@@ -31,18 +31,5 @@ public class ChoppingStation{
 
     }
 
-    // Example Scenario
-    public static void main(String[] args) {
-        Chef chef1 = new Chef(5,5,5,5);
-        chef1.stack.push(new Item("Onion", ""));
-
-        Ingredients tomatoe_box = new Ingredients(new Item("Tomatoe", ""));
-        tomatoe_box.interact(chef1);
-        chef1.stack.printStack();
-
-        ChoppingStation chop1 = new ChoppingStation();
-        chop1.interact(chef1);
-        chef1.stack.printStack();
-
-    }
+    
 }
