@@ -1,6 +1,19 @@
 package Objects;
 
+import java.io.FileReader;
 import java.util.Arrays;
+import java.util.HashMap;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+
+import com.badlogic.gdx.graphics.Texture;
 
 public class Station extends GameObject{
     
@@ -14,19 +27,44 @@ public class Station extends GameObject{
     boolean interacting;
     // [[type, action]]
     String[][] station_actions;
+    String action;
     boolean assembled;
-
-    public Station(int x, int y, int width, int height, String type, float interaction_duraction) {
+    HashMap<String, String[]> data_map = new HashMap<String, String[]>();
+    
+    public Station(int x, int y, int width, int height, String type, float interaction_duraction) throws FileNotFoundException, IOException, ParseException {
         super(x, y, width, height);
         this.type = type;
         items_on_station = new Item[10];
         pointer = 0;
+
+        Object obj = new JSONParser().parse(new FileReader("assets/Stations.json"));
+        JSONArray jsonArray = (JSONArray) obj;
+        int length = jsonArray.size();
+        for (int i = 0; i < length; i++) {
+            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+            if (jsonObject.get("type")== type){
+                action = (String) jsonObject.get("action");
+                interactable_items = (String[]) jsonObject.get("interactable_items");
+                interaction_duraction = (Integer) jsonObject.get("interaction_duration");
+                img_name = (String) jsonObject.get("img_name");
+                //img = new Texture(img_name);
+                System.out.println(img_name);
+                img = new Texture("StationImage.png");
+            }
+        }
+
+        
         this.interaction_duration = interaction_duration;
         interacting = false;
         station_actions = new String[][] {{"Chopping", "Chopped"},{"Toaster", "Toasted"}, {"Hob", "Flip Me"}};
         assembled = false;
+        data_map.put("Chopping", new String[]{"img.png", "Chopped","Tomato", "Onion", "Lettuce"});
+        data_map.put("Toaster", new String[]{"img.png", "Toasted","Burger Bun"});
+        data_map.put("Hob", new String[]{"img.png", "Flip Me"});
         if (type == "Chopping"){
             interactable_items = new String[] {"Tomato", "Onion", "Lettuce"};
+            img_name = "ChoppingStation.png";
+            img = new Texture(img_name);
         }
         else if (type == "Toaster"){
             interactable_items = new String[] {"Burger Bun"};
@@ -117,6 +155,7 @@ public class Station extends GameObject{
             }
             chef.stack.pop();
         }
+    
         else{
             // Place item on station
             if (items_on_station[0] == null){
@@ -190,4 +229,9 @@ public class Station extends GameObject{
         return;
     }
 
+    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+        Station chop = new Station(0, 0, 0, 0, "Chopping", interaction_duration);
+        //Station hob = new Station(0, 0, 0, 0, "Hob", interaction_duration);
+       // Station bin = new Station(0, 0, 0, 0, "Bin", interaction_duration);
+    }
 }

@@ -2,9 +2,10 @@ package Objects;
 
 public class Person extends GameObject {
 
-    public Person(int x, int y, int width, int height) {
+    float speed;
+    public Person(int x, int y, int width, int height, float speed) {
         super(x, y, width, height);
-        //TODO Auto-generated constructor stub
+        
     }
     
 }

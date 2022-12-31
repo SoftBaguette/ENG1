@@ -5,8 +5,8 @@ public class Chef extends Person {
     Item[] items; 
     Stack stack;
 
-    public Chef(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public Chef(int x, int y, int width, int height, float speed) {
+        super(x, y, width, height, speed);
         stack = new Stack(5);
     }
 

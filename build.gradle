@@ -57,6 +57,6 @@ project(":core") {
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        
+        implementation fileTree(dir: 'libs', include: '*.jar')
     }
 }

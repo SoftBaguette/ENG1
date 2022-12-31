@@ -1,6 +1,8 @@
 package Objects;
 
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class GameObject {
@@ -12,7 +14,8 @@ public class GameObject {
     int animation_state;
     int rotation;
     Rectangle hitbox;
-
+    String img_name; 
+    Texture img;
     public GameObject(int x, int y, int width, int height){
         this.x = x;
         this.y = y;
@@ -22,6 +25,8 @@ public class GameObject {
         animation_state = 0;
         rotation = 0;
         hitbox = new Rectangle(x,y, width, height);
+        img_name = "";
+        //img = new Texture(img_name);
     }
 
     public GameObject() {
@@ -38,6 +43,10 @@ public class GameObject {
     public boolean check_hitbox(GameObject other){
         return hitbox.overlaps(other.hitbox);
         
+    }
+
+    public void draw(Batch batch){
+        batch.draw(img, x, y);
     }
 
 

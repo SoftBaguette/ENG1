@@ -18,9 +18,9 @@ public class TestPrograms {
     }
 
     public void large_scale_test(){
-        Chef chef1 = new Chef(0, 0, 10, 10);
-        Chef chef2 = new Chef(100, 0, 10, 10);
-        Chef chef3 = new Chef(200, 0, 10, 10); 
+        Chef chef1 = new Chef(0, 0, 10, 10, 0);
+        Chef chef2 = new Chef(100, 0, 10, 10, 0);
+        Chef chef3 = new Chef(200, 0, 10, 10, 0); 
         Chef[] chefs = {chef1, chef2, chef3};
 
         // Salad Items
