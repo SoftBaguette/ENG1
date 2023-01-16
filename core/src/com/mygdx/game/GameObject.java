@@ -1,4 +1,4 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game;
 
 
 import com.badlogic.gdx.graphics.Texture;
@@ -46,7 +46,7 @@ public class GameObject {
     }
 
     public void draw(Batch batch){
-        batch.draw(img, x, y);
+        batch.draw(img, x, y, width, height);
     }
 
 

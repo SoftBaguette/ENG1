@@ -1,4 +1,4 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game;
 
 import java.io.FileReader;
 import java.util.Arrays;
@@ -30,13 +30,14 @@ public class Station extends GameObject{
     String action;
     boolean assembled;
     ProgressBar progressBar;
+    float interaction_duraction;
     
-    public Station(int x, int y, int width, int height, String type, float interaction_duraction, Stage stage) throws FileNotFoundException, IOException, ParseException {
+    public Station(int x, int y, int width, int height, String type) throws FileNotFoundException, IOException, ParseException {
         super(x, y, width, height);
         this.type = type;
         items_on_station = new Item[10];
         pointer = 0;
-
+        progressBar = new ProgressBar(x+7, y+height+10, 50,10);
         Object obj = new JSONParser().parse(new FileReader("assets/Stations.json"));
         JSONArray jsonArray = (JSONArray) obj;
         int length = jsonArray.size();
@@ -47,8 +48,10 @@ public class Station extends GameObject{
                 action = (String) jsonObject.get("action");
                 JSONArray interactable_items_json = (JSONArray) jsonObject.get("interactable_items");
                 interactable_items = new String[interactable_items_json.size()];
+                System.out.println(interactable_items_json.size());
                 for (int j = 0; j < interactable_items_json.size(); j++) {
-                    interactable_items[i] = (String) interactable_items_json.get(i);
+                    System.out.println((String) interactable_items_json.get(j));
+                    interactable_items[j] = (String) interactable_items_json.get(j);
                 }
                 interaction_duraction = (Long) jsonObject.get("interaction_duration");
                 img_name = (String) jsonObject.get("img_name");
@@ -69,25 +72,46 @@ public class Station extends GameObject{
 
     public void update(){
         if (interacting == true){
+            long interaction_duration=3000;
+            float percent = (float) (System.currentTimeMillis() - start_time_interaction+1)/interaction_duration;
+            progressBar.setProgress((int) (percent*100));
+            //System.out.println(progressBar.progress);
             if (System.currentTimeMillis() - start_time_interaction > interaction_duration){
-                progressBar.setProgress((int)((System.currentTimeMillis() - start_time_interaction)/ interaction_duration)*100);
                 items_on_station[0] = updated_item;
                 interacting = false;
+                progressBar.setProgress(0);
                 System.out.println("Finished");
             }
         }
     }
 
     public void draw(Batch batch){
-        batch.draw(img,x,y);
+        batch.draw(img,x,y,width,height);
         if (interacting == true){
             progressBar.draw(batch, 0);
+        }
+        if (type == "Assembly"){
+            int x_offset = 0;
+            for(Item station_item: items_on_station){
+                if (station_item != null){
+                    batch.draw(new Texture("Plate.png"), x + x_offset, y, 32, 32);
+                    batch.draw(new Texture(station_item.name + station_item.status + ".png"),x + x_offset, y , 32,32);
+                    x_offset +=50;
+                }
+
+            }
+        }else{
+            if (items_on_station[0] != null){
+                batch.draw(new Texture("Plate.png"), x, y, 32, 32);
+                batch.draw(new Texture(items_on_station[0].name + items_on_station[0].status + ".png"),x , y , 32,32);
+            }
         }
     }
 
     public void interact(Chef chef, Recipe recipe){
         // Place down item from chef stack to station
         if (type == "Assembly"){
+
             if (assembled == true){
                 if (chef.stack.isFull()){
                     System.out.println("Stack is full");
@@ -154,6 +178,10 @@ public class Station extends GameObject{
             // Place item on station
             if (items_on_station[0] == null){
                 if (chef.stack.isEmpty() == false){
+                    for (String item: interactable_items){
+                        System.out.println(item);
+                    }
+
                     if(Arrays.asList(interactable_items).contains(chef.stack.peak().name)){
                         items_on_station[0] = chef.stack.pop();
                     }
@@ -165,7 +193,7 @@ public class Station extends GameObject{
             else if (items_on_station[0].status == "" && interacting == false){
                 for (int i = 0; i < station_actions.length; i++) {
                     if (type == station_actions[i][0]){
-                        updated_item = items_on_station[0];
+                        updated_item = new Item(items_on_station[0].name, station_actions[i][1]);
                         updated_item.status = station_actions[i][1];
                         start_time_interaction = System.currentTimeMillis();
                         interacting = true;
@@ -185,8 +213,24 @@ public class Station extends GameObject{
                     items_on_station[0] = null;
                 }
             }
-            else if (items_on_station[0].status == "Flip Me" && type == "Hob"){
+            //TODO: CHANGE THIS BECAUSE IT IS NOT GOOD
+            // Picking up item when it is complete
+            else if (items_on_station[0].status == "Cooked" && type == "Hob"){
+                if (interacting == false){
+                    if (chef.stack.isFull()){
+                        System.out.println("Stack is full");
+                        return;
+                    }
+                    chef.stack.push(items_on_station[0]);
+                    updated_item = null;
+                    items_on_station[0] = null;
+                }
+            }
 
+            else if (items_on_station[0].status == "Flip Me" && type == "Hob"){
+                items_on_station[0].status = "Cooked";
+                start_time_interaction = System.currentTimeMillis();
+                interacting = true;
             }
         }
 
@@ -224,7 +268,10 @@ public class Station extends GameObject{
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
-        Stage stage;
+        Stage stage = null;
+        Chef chef = new Chef (0,0,0,0,0);
+        //Station chop = new Station(0,0,0,0,"Chopping",5,stage);
+        Item lettuce = new Item("Lettuce","");
         //Station chop = new Station(0, 0, 0, 0, "Chopping", interaction_duration, stage);
         //Station hob = new Station(0, 0, 0, 0, "Hob", interaction_duration);
        // Station bin = new Station(0, 0, 0, 0, "Bin", interaction_duration, stage);

@@ -1,8 +1,8 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game;
 
 public class Stack {
     Item arr[];
-    int top;
+    public int top;
     int capacity;
 
     //Initialize stack

@@ -1,4 +1,4 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game;
 
 public class Person extends GameObject {
 
