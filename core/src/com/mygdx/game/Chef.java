@@ -9,7 +9,6 @@ public class Chef extends Person {
     
     Item[] items; 
     public Stack stack;
-
     Texture plate_img;
 
     public Chef(int x, int y, int width, int height, float speed) {
@@ -19,6 +18,7 @@ public class Chef extends Person {
         plate_img = new Texture("Plate.png");
     }
 
+    // Allow the user to move the chef using the arrow keys
     public void move(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) x -= 200 * Gdx.graphics.getDeltaTime();
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x += 200 * Gdx.graphics.getDeltaTime();
@@ -27,6 +27,7 @@ public class Chef extends Person {
         hitbox.setPosition(x,y);
     }
 
+    //Draw the chef and each item it is carrying on a plate
     public void draw(Batch batch){
         int x_offset = 0;
         int y_offset = 0;
@@ -38,30 +39,5 @@ public class Chef extends Person {
             y_offset+=5;
         }
     }
-
-    public void move2(int x, int y){
-        this.x = x;
-        this.y = y;
-        this.hitbox.setPosition(x, y);
-    }
-
-    public void move_left(){
-        x -= speed *Gdx.graphics.getDeltaTime();
-    }
-    public void move_right(){
-        x += speed * Gdx.graphics.getDeltaTime();
-    }
-
-    public void move_up(){
-        y -= speed  * Gdx.graphics.getDeltaTime();
-    }
-    public void move_down(){
-        y += speed  * Gdx.graphics.getDeltaTime();
-    }
-    public void print_pos(){
-        System.out.println(x);
-        System.out.println(y);
-    }
-    
 
 }

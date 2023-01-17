@@ -59,18 +59,5 @@ public class Stack {
     public Item peak(){
         return arr[top];
     }
-
-    public static void main(String[] args) {
-        Stack chef_hands = new Stack(5);
-        chef_hands.push(new Item("Lettuce", ""));
-        chef_hands.push(new Item("Onion", ""));
-
-        chef_hands.printStack();
-
-        chef_hands.pop();
-        chef_hands.printStack();
-        chef_hands.push(new Item("Onion", "chopped"));
-        chef_hands.printStack();
-    }
     
 }

@@ -14,7 +14,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MainGame extends ApplicationAdapter {
@@ -44,17 +43,17 @@ public class MainGame extends ApplicationAdapter {
     private Station assembly_station;
     public Station[] stations;
 
-    private Stage stage;
+
 
     private Customer customer1;
     private Customer[] customers;
     private int current_customer;
     private int reputation;
 
+    //Initialise all of the objects
     @Override
     public void create(){
         reputation = 3;
-        stage = new Stage();
 
 
         chef1 = new Chef(0, 0, 32, 32, 200);
@@ -101,8 +100,8 @@ public class MainGame extends ApplicationAdapter {
             chopping_station = new Station(100,300,64,64, "Chopping");
             hob_station = new Station(180,300,64,64, "Hob");
             toasting_station = new Station(250,300,64,64, "Toaster");
-            /*
-            Station bin = new Station(110,0,50,10, "Bin", 2, stage);*/
+            
+            bin = new Station(410,200,50,10, "Bin");
             assembly_station = new Station(200,200,128,65, "Assembly");
         } catch (IOException | ParseException e) {
             // TODO Auto-generated catch block
@@ -112,7 +111,7 @@ public class MainGame extends ApplicationAdapter {
 
         //Station[] stations = {tomato_box, lettuce_box, onion_box, burger_meat_box, burger_bun_box, chopping_station, toasting_station, hob_station, bin, assembly_station};
         //Station[] stations = {tomato_box, lettuce_box, onion_box, burger_meat_box, burger_bun_box, chopping_station};
-        stations = new Station[] {chopping_station, tomato_box, lettuce_box, onion_box,burger_bun_box, burger_meat_box, assembly_station, toasting_station, hob_station};
+        stations = new Station[] {chopping_station, tomato_box, lettuce_box, onion_box,burger_bun_box, burger_meat_box, assembly_station, toasting_station, hob_station, bin};
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false,800, 480);

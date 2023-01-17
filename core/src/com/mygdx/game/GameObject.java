@@ -49,8 +49,5 @@ public class GameObject {
         batch.draw(img, x, y, width, height);
     }
 
-
-   
-
 }
 

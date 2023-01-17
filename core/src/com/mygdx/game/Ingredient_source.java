@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import org.json.simple.parser.ParseException;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Ingredient_source extends Station{
     Item ingredient;

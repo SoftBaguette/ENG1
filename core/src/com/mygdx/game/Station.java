@@ -85,6 +85,7 @@ public class Station extends GameObject{
         }
     }
 
+    //Draw the station and also draw all the items on each station
     public void draw(Batch batch){
         batch.draw(img,x,y,width,height);
         if (interacting == true){
@@ -234,47 +235,8 @@ public class Station extends GameObject{
             }
         }
 
-        
-        /*
-
-        else if (type == "Hob"){
-            // Empty station
-            if (pointer == 0){
-                Item top_stack_item = chef.stack.peak();
-                if (top_stack_item.name == "Burger Meat"){
-                    if (top_stack_item.status == ""){
-                        items_on_station[pointer] = top_stack_item;
-                        pointer++;
-                        // Wait x amount of time
-                        items_on_station[0].status = "Flip Me";
-
-                    }
-                }
-            }
-            else if (pointer > 0){
-                if (items_on_station[0].status == "Flip Me"){
-                    items_on_station[0].status = "Flipped";
-                    // Wait x amount of time
-                    items_on_station[0].status = "Cooked";
-                    chef.stack.pop();
-                    chef.stack.push(items_on_station[0]);
-                    pointer --;
-                }
-            }
-            }*/
-        
         chef.stack.printStack();
         return;
     }
 
-    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
-        Stage stage = null;
-        Chef chef = new Chef (0,0,0,0,0);
-        //Station chop = new Station(0,0,0,0,"Chopping",5,stage);
-        Item lettuce = new Item("Lettuce","");
-        //Station chop = new Station(0, 0, 0, 0, "Chopping", interaction_duration, stage);
-        //Station hob = new Station(0, 0, 0, 0, "Hob", interaction_duration);
-       // Station bin = new Station(0, 0, 0, 0, "Bin", interaction_duration, stage);
-       
-    }
 }
