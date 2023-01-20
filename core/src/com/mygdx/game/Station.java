@@ -136,7 +136,7 @@ public class Station extends GameObject{
                     if (chef.stack.isEmpty() != true){
                         if (chef.stack.peak().name == item.name && chef.stack.peak().status == item.status){
                             items_on_station[++pointer] = chef.stack.pop();
-                            if (pointer == 10){
+                            if (pointer == 9){
                                 pointer = 0;
                             }
                             System.out.println("\n" + item.name + " added to assemly station");
