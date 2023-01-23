@@ -12,7 +12,6 @@ public class DesktopLauncher {
 		config.setTitle("Cook");
 		config.setWindowedMode(800,480);
 		config.setForegroundFPS(60);
-		config.setTitle("My GDX Game");
 		new Lwjgl3Application(new MainGame(), config);
 	}
 }
