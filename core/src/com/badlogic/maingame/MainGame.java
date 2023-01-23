@@ -13,6 +13,7 @@ import com.badlogic.gdx.Input;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -43,6 +44,10 @@ public class MainGame extends ApplicationAdapter {
     private Station assembly_station;
     public Station[] stations;
 
+    // Background
+    Texture img;
+    Texture ingredient_station;
+
 
 
     private Customer customer1;
@@ -54,6 +59,11 @@ public class MainGame extends ApplicationAdapter {
     @Override
     public void create(){
         reputation = 3;
+
+        // Background
+        img = new Texture("Background.png");
+        ingredient_station = new Texture("IngredientStation.png");
+
 
 
         chef1 = new Chef(0, 0, 32, 32, 200);
@@ -78,12 +88,12 @@ public class MainGame extends ApplicationAdapter {
 
 
         try {
-            tomato_box = new Ingredient_source(20, 400, 64, 64, null,tomato);
-            lettuce_box = new Ingredient_source(90, 400, 10, 10, null, lettuce);
-            onion_box = new Ingredient_source(160, 400, 10, 10, null, onion);
+            tomato_box = new Ingredient_source(82, 367, 32, 32, null,tomato);
+            lettuce_box = new Ingredient_source(124, 367, 32, 32, null, lettuce);
+            onion_box = new Ingredient_source(166, 367, 32, 32, null, onion);
 
-            burger_meat_box = new Ingredient_source(210, 400, 10, 10, null, burger_meat);
-            burger_bun_box = new Ingredient_source(440, 400, 10, 10, null,  burger_bun);
+            burger_meat_box = new Ingredient_source(208, 367, 32, 32, null, burger_meat);
+            burger_bun_box = new Ingredient_source(250, 367, 32, 32, null,  burger_bun);
         } catch (IOException | ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -92,17 +102,17 @@ public class MainGame extends ApplicationAdapter {
 
         recipes = new Recipe[]{salad, burger};
         int current_recipe = 0;
-        customer1 = new Customer(50,50,32,32,100,recipes);
+        customer1 = new Customer(50,50,43,64,100,recipes);
         customers = new Customer[5];
         customers[0] = customer1;
         current_customer = 0;
         try {
-            chopping_station = new Station(100,300,64,64, "Chopping");
-            hob_station = new Station(180,300,64,64, "Hob");
-            toasting_station = new Station(250,300,64,64, "Toaster");
+            chopping_station = new Station(691,323,99,81, "Chopping");
+            hob_station = new Station(428,323,62,81, "Hob");
+            toasting_station = new Station(725,192,67,67, "Toaster");
             
-            bin = new Station(410,200,50,10, "Bin");
-            assembly_station = new Station(200,200,128,65, "Assembly");
+            bin = new Station(14,323,44,60, "Bin");
+            assembly_station = new Station(491,323,198,81, "Assembly");
         } catch (IOException | ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -128,6 +138,9 @@ public class MainGame extends ApplicationAdapter {
         BitmapFont font = new BitmapFont();
         font.draw(batch, "Hello world", 10, 10);
 
+        // Background
+        batch.draw(img, 0, 0);
+        batch.draw(ingredient_station,65, 323);
 
         //Drawing everything
         for (Station station : stations) {
@@ -158,7 +171,7 @@ public class MainGame extends ApplicationAdapter {
                             if (current_customer == customers.length){
                                 current_customer = 0;
                             }
-                            customers[current_customer] = new Customer(50,50,32,32,50,recipes);
+                            customers[current_customer] = new Customer(50,50,43,64,50,recipes);
 
                         }
                         }
