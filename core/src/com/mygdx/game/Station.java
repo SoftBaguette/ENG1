@@ -2,18 +2,15 @@ package com.mygdx.game;
 
 import java.io.FileReader;
 import java.util.Arrays;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+
 
 public class Station extends GameObject{
     
@@ -38,6 +35,8 @@ public class Station extends GameObject{
         items_on_station = new Item[10];
         pointer = 0;
         progressBar = new ProgressBar(x+7, y+height+10, 50,10);
+        // Takes data from the json file and assigns each value to the station's attributes
+        // WARNING! There is no checker so the json file needs to be written correctly
         Object obj = new JSONParser().parse(new FileReader("assets/Stations.json"));
         JSONArray jsonArray = (JSONArray) obj;
         int length = jsonArray.size();
@@ -48,19 +47,15 @@ public class Station extends GameObject{
                 action = (String) jsonObject.get("action");
                 JSONArray interactable_items_json = (JSONArray) jsonObject.get("interactable_items");
                 interactable_items = new String[interactable_items_json.size()];
-                System.out.println(interactable_items_json.size());
                 for (int j = 0; j < interactable_items_json.size(); j++) {
-                    System.out.println((String) interactable_items_json.get(j));
                     interactable_items[j] = (String) interactable_items_json.get(j);
                 }
                 interaction_duraction = (Long) jsonObject.get("interaction_duration");
                 img_name = (String) jsonObject.get("img_name");
-                //TODO uncomment this when moving to intelliJ
                 img = new Texture(img_name);
-                System.out.println(img_name);
-                //img = new Texture("badlogic.jpg");
             }
         }
+        
         interacting = false;
         station_actions = new String[][] {{"Chopping", "Chopped"},{"Toaster", "Toasted"}, {"Hob", "Flip Me"}};
         assembled = false;
@@ -70,12 +65,14 @@ public class Station extends GameObject{
         super();
     }
 
+    /*
+    
+    */
     public void update(){
         if (interacting == true){
             long interaction_duration=3000;
             float percent = (float) (System.currentTimeMillis() - start_time_interaction+1)/interaction_duration;
             progressBar.setProgress((int) (percent*100));
-            //System.out.println(progressBar.progress);
             if (System.currentTimeMillis() - start_time_interaction > interaction_duration){
                 items_on_station[0] = updated_item;
                 interacting = false;
