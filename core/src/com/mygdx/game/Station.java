@@ -92,7 +92,7 @@ public class Station extends GameObject{
     */
     public void update(){
         if (interacting == true){
-            //long interaction_duration=3000;
+            long interaction_duration=3000;
             float percent = (float) (System.currentTimeMillis() - start_time_interaction+1)/interaction_duration;
             progressBar.setProgress((int) (percent*100));
             if (System.currentTimeMillis() - start_time_interaction > interaction_duration){
