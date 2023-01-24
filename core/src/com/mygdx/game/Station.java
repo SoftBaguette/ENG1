@@ -92,7 +92,7 @@ public class Station extends GameObject{
     */
     public void update(){
         if (interacting == true){
-            long interaction_duration=3000;
+            //long interaction_duration=3000;
             float percent = (float) (System.currentTimeMillis() - start_time_interaction+1)/interaction_duration;
             progressBar.setProgress((int) (percent*100));
             if (System.currentTimeMillis() - start_time_interaction > interaction_duration){
@@ -105,6 +105,8 @@ public class Station extends GameObject{
     }
 
     //Draw the station and also draw all the items on each station
+    // If the station is an assembly station, draw all of the items on the station
+    // If it is anyother station, draw just 1 item
     public void draw(Batch batch){
         batch.draw(img,x,y,width,height);
         if (interacting == true){
@@ -127,7 +129,9 @@ public class Station extends GameObject{
             }
         }
     }
-
+    
+    
+    // This method is responsible for the chef interacts with all the stations
     public void interact(Chef chef, Recipe recipe){
         // Place down item from chef stack to station
         if (type == "Assembly"){
@@ -236,7 +240,7 @@ public class Station extends GameObject{
                     items_on_station[0] = null;
                 }
             }
-            //TODO: CHANGE THIS BECAUSE IT IS NOT GOOD
+            //TODO: Make this a bit better
             // Picking up item when it is complete
             else if (items_on_station[0].status == "Cooked" && type == "Hob"){
                 if (interacting == false){
