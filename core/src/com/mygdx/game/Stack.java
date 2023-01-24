@@ -1,5 +1,9 @@
 package com.mygdx.game;
 
+/*
+    The class Chef uses the stack and it is how it carries items and interacts with stations
+*/
+
 public class Stack {
     Item arr[];
     public int top;
