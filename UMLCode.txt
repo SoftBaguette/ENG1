@@ -1,0 +1,110 @@
+@startuml
+!theme aws-orange
+
+Person <-- Chef
+Person <-- Customer
+Station <-- Ingridient_source
+GameObject <-- Person
+GameObject <-- Station
+
+abstract class GameObject{
+int x
+int y
+int width
+int height
+int direction
+int animation_state
+int rotation
+Rectangle hitbox
+String img_name
+Texture img
++bool check_hitbox()
++void draw()
+}
+
+class Chef {
+stack items
++void interacts()
++bool isPlayerControlling()
+}
+
+class Station{
+String type
+Item[] items_on_station
+int pointer
+String[] interactable_items
+Item updated_item
+long start_time_interaction
+long interaction_duration
+bool interacting
+String[][] station_actions
+String action
+bool assembled
+ProgressBar progressBar
+float interaction_duration
++void update()
++void draw()
++void interact()
+}
+
+class Stack{
+Item arr[]
++int top
+int capacity
++void push()
++Item pop()
++int getSize()
++bool isEmpty()
++bool isFull()
++void printStack()
++Item peak()
+}
+
+class Recipe{
+String recipe_name
+Item[] ingridients
+}
+
+class ProgressBar{
+int progress
+int x
+int y
+int width
+int height
+Texture back
+Texture loading
++void draw()
++void setProgress()
+}
+
+class Person{
+float speed
+}
+
+class Item{
+String name
+String status
+}
+
+class Customer{
+String status
++Recipe desired_food
++void draw()
++void move()
++int served()
+}
+
+class Ingridient_source{
+Item ingridient
++void interact()
++void update()
++void draw()
+}
+
+class MyGdxGame{
+SpriteBatch batch
+Texture img
++void render()
++void dispose()
+}
+@enduml
