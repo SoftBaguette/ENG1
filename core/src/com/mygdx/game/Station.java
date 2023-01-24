@@ -11,6 +11,28 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+/*
+    The station class is responsible for interacting with the chef to affect the cooking items
+    
+    Assembly station:
+        The assembly station will check if the items are valid for the recipe. 
+        If all the items on the station are in the recipe, it will make the recipe item so the
+        chef can pick it up.
+        
+    Bin:
+        It will pop() the top item off the chef's stack (if it isn't empty)
+    
+    Normal Station:
+        If the station is empty and the chef has something in its stack, add to the table
+        When the chef interacts with a station with something on it, the station will be 
+        interacting which will make a progress bar.
+        When an item has finished interacting, the chef can pick it up and add it to their stack
+        
+        
+
+*/
+
+
 
 public class Station extends GameObject{
     
@@ -66,7 +88,7 @@ public class Station extends GameObject{
     }
 
     /*
-    
+        The update function is responisble for changing the progress of the progress bar
     */
     public void update(){
         if (interacting == true){
