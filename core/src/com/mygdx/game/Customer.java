@@ -16,7 +16,9 @@ public class Customer extends Person{
         img = new Texture("Customer.png");
     }
 
-    // Draw the customer
+    // Draw the customer using batch
+    // The customer will show what item it wants.
+    // When the customer has been served, it will show if it is happy or sad (using a simple emoji)
     public void draw(Batch batch){
         batch.draw(img, x, y ,width, height);
         //Draw how the customer is feeling after being served
@@ -32,7 +34,7 @@ public class Customer extends Person{
 
     }
     
-    //Move the customer
+    //Move the customer towards the serving station. When it is served move it off the screen
     public void move(){
         hitbox.setPosition(x,y);
         if (status=="started"){
@@ -52,6 +54,10 @@ public class Customer extends Person{
         
     }
 
+    // This function is for serving the customers.
+    // It takes in a chef as a paremeter and uses it's stack
+    // Returns an integer value that affects the reputation
+    // TODO: For assessment 2 change what happens when the customer is served
     public int served(Chef chef){
         if (chef.stack.peak().name == desired_food.recipe_name){
             System.out.println("Served");
