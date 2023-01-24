@@ -5,8 +5,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public class Chef extends Person {
+
+/*
+    Each chef is a GameObject which the user can control.
+    The stack is what the stations will interact with to pop items or push items
     
+*/
+
+public class Chef extends Person {
     Item[] items; 
     public Stack stack;
     Texture plate_img;
@@ -18,20 +24,32 @@ public class Chef extends Person {
         plate_img = new Texture("Plate.png");
     }
 
-    // Allow the user to move the chef using the arrow keys
+    // Allow the user to move the chef using the arrow keys and WASD keys
+    //TODO have boundaries
     public void move(){
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) x -= 200 * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x += 200 * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) y += 200 * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) y -= 200 * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) x -= 200 * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) x += 200 * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) y += 200 * Gdx.graphics.getDeltaTime();
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) y -= 200 * Gdx.graphics.getDeltaTime();
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
+             x -= 200 * Gdx.graphics.getDeltaTime();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
+             x += 200 * Gdx.graphics.getDeltaTime();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)){
+             y += 200 * Gdx.graphics.getDeltaTime();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)){
+             y -= 200 * Gdx.graphics.getDeltaTime();
+        }
+        // The hitbox needs to be updated everytime the chef moves
         hitbox.setPosition(x,y);
     }
 
-    //Draw the chef and each item it is carrying on a plate
+    /*
+        Draw the chef and each item + plate the chef is carrying
+        Has the batch as a parameter to draw to the screen
+        The filenames of need to be specific as it makes a texture based on the items the chef is holding and
+        finds a file for that item. E.g. Chopped onion has the img name "OnionChopped.png" since the name of the
+        item will be "Onion" and the status is "Chopped"
+    */
     public void draw(Batch batch){
         int x_offset = 0;
         int y_offset = 0;
