@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/*
+    The station class primarily uses the progress bar when the chef is interacting with it.
+*/
+
 public class ProgressBar extends Actor{
     ShapeRenderer shapeRenderer;
     int progress;
