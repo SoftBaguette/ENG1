@@ -2,11 +2,13 @@ package com.mygdx.game;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import com.badlogic.gdx.graphics.Texture;
 import org.json.simple.parser.ParseException;
-
 import com.badlogic.gdx.graphics.g2d.Batch;
+
+/*
+    The ingredient source is very similar to stations except it has one job which is to add one item to the chef's stack
+*/
 
 public class Ingredient_source extends Station{
     Item ingredient;
@@ -20,8 +22,7 @@ public class Ingredient_source extends Station{
         img = new Texture(ingredient.name + "Box.png");
     }
 
-    // Pushes the item into the Chef's stack if there is 
-    // space
+    // Pushes the item into the Chef's stack if there is space
     public void interact(Chef chef, Recipe recipe){
         if (chef.stack.isFull()){
             return;
@@ -33,6 +34,8 @@ public class Ingredient_source extends Station{
     public void update(){
 
     }
+    
+    // Draw the ingredient source to the screen using batch
     @Override
     public void draw(Batch batch){
         batch.draw(img, x,y);
