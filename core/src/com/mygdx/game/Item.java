@@ -22,6 +22,8 @@ public class Item {
     // Assembled
     String status;
     
+    // Item images are name + status + ".png"
+    
     // Initialise object
     public Item(String name,String status){
         this.status = status;
