@@ -25,6 +25,7 @@ public class MainGame extends ApplicationAdapter {
     private Chef chef2;
     private Chef chef3;
     private Chef[] chefs;
+    private int current_chef;
     private Item onion;
     private  Item lettuce;
     private  Item tomato;
@@ -67,9 +68,10 @@ public class MainGame extends ApplicationAdapter {
 
 
         chef1 = new Chef(0, 0, 32, 32, 200);
-        chef2 = new Chef(1000, 0, 10, 10, 0);
-        chef3 = new Chef(2000, 0, 10, 10, 0);
+        chef2 = new Chef(300, 0, 32, 32, 200);
+        chef3 = new Chef(2000, 0, 32, 32, 0);
         chefs = new Chef[] {chef1, chef2, chef3};
+        current_chef = 0;
 
 
 
@@ -181,7 +183,16 @@ public class MainGame extends ApplicationAdapter {
 
 
 
-        chef1.move();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
+            current_chef = 0;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
+            current_chef = 1;
+        }
+        
+        chefs[current_chef].move();
+        //chef1.move();
+
 
 
 
