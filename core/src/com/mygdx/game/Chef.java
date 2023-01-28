@@ -20,7 +20,7 @@ public class Chef extends Person {
     public Chef(int x, int y, int width, int height, float speed) {
         super(x, y, width, height, speed);
         stack = new Stack(5);
-        img = new Texture("ChefImage.png");
+        img = new Texture("ChefImage.PNG");
         plate_img = new Texture("Plate.png");
     }
 
