@@ -32,4 +32,11 @@
         "img_name": "HobStation.png",
         "interactable_items":["Burger Meat"],
         "interaction_duration":4000
-}]
+    },
+    {
+        "type":"Serving",
+        "action":"",
+        "img_name": "ServingStation.png",
+        "interactable_items":[],
+        "interaction_duration":2
+    }]
