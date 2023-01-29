@@ -23,12 +23,12 @@ public class Customer extends Person{
         batch.draw(img, x, y ,width, height);
         //Draw how the customer is feeling after being served
         if (status == "Happy" || status == "Sad"){
-            batch.draw(new Texture(status+".png"), x+15, y+15, 32,32);
+            batch.draw(new Texture(status+".png"), x+30, y+30, 32,32);
         }
         // Draw what food item the customer wants
         else{
-            batch.draw(new Texture("ThinkingBubble.png"), x+15, y+15);
-            batch.draw(new Texture(desired_food.recipe_name + ".png"),x+15, y + 15, 32,32);
+            batch.draw(new Texture("ThinkingBubble.png"), x+30, y+30);
+            batch.draw(new Texture(desired_food.recipe_name + ".png"),x+30, y + 30, 32,32);
         }
 
 
