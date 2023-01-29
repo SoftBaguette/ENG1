@@ -42,6 +42,7 @@ public class MainGame extends ApplicationAdapter {
     private Station toasting_station;
     private Station hob_station;
     private Station bin;
+    private Station serving_station;
     private Station assembly_station;
     public Station[] stations;
 
@@ -67,8 +68,8 @@ public class MainGame extends ApplicationAdapter {
 
 
 
-        chef1 = new Chef(0, 0, 32, 32, 200);
-        chef2 = new Chef(300, 0, 32, 32, 200);
+        chef1 = new Chef(383, 150, 32, 32, 200);
+        chef2 = new Chef(430, 150, 32, 32, 200);
         chef3 = new Chef(2000, 0, 32, 32, 0);
         chefs = new Chef[] {chef1, chef2, chef3};
         current_chef = 0;
@@ -104,7 +105,7 @@ public class MainGame extends ApplicationAdapter {
 
         recipes = new Recipe[]{salad, burger};
         int current_recipe = 0;
-        customer1 = new Customer(50,50,43,64,100,recipes);
+        customer1 = new Customer(50,25,43,64,100,recipes);
         customers = new Customer[5];
         customers[0] = customer1;
         current_customer = 0;
@@ -112,7 +113,7 @@ public class MainGame extends ApplicationAdapter {
             chopping_station = new Station(691,323,99,81, "Chopping");
             hob_station = new Station(428,323,62,81, "Hob");
             toasting_station = new Station(725,192,67,67, "Toaster");
-            
+            serving_station = new Station(9,96,783,31,"Serving");
             bin = new Station(14,323,44,60, "Bin");
             assembly_station = new Station(491,323,198,81, "Assembly");
         } catch (IOException | ParseException e) {
@@ -123,7 +124,7 @@ public class MainGame extends ApplicationAdapter {
 
         //Station[] stations = {tomato_box, lettuce_box, onion_box, burger_meat_box, burger_bun_box, chopping_station, toasting_station, hob_station, bin, assembly_station};
         //Station[] stations = {tomato_box, lettuce_box, onion_box, burger_meat_box, burger_bun_box, chopping_station};
-        stations = new Station[] {chopping_station, tomato_box, lettuce_box, onion_box,burger_bun_box, burger_meat_box, assembly_station, toasting_station, hob_station, bin};
+        stations = new Station[] {chopping_station, tomato_box, lettuce_box, onion_box,burger_bun_box, burger_meat_box, assembly_station, toasting_station, hob_station, bin, serving_station};
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false,800, 480);
