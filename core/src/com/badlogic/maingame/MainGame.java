@@ -186,6 +186,9 @@ public class MainGame extends ApplicationAdapter {
             }
         }
 
+        if (reputation == 0){
+            System.exit(0);
+        }
 
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
