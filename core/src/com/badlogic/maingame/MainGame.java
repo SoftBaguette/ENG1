@@ -166,23 +166,26 @@ public class MainGame extends ApplicationAdapter {
             if (customer!= null){
                 customer.move();
                 customer.draw(batch);
-                if (chef1.check_hitbox(customer)){
-                    if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
-                        if (chef1.stack.top != -1){
-                            reputation += customer.served(chef1);
-                            current_customer += 1;
-                            // This section is responsible for either the scenario mode or the endless mode
-                            if (current_customer == customers.length){
-                                //If scenario mode: (current solution is the game exits)
-                                System.exit(0);
-                                // Uncomment code below for endless and commment code above
-                                //current_customer = 0;
-                            }
-                            customers[current_customer] = new Customer(50,50,43,64,50,recipes);
+                for (Chef chef: chefs){
+                    if (chef.check_hitbox(customer)){
+                        if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
+                            if (chef.stack.top != -1){
+                                reputation += customer.served(chef);
+                                current_customer += 1;
+                                // This section is responsible for either the scenario mode or the endless mode
+                                if (current_customer == customers.length){
+                                    //If scenario mode: (current solution is the game exits)
+                                    System.exit(0);
+                                    // Uncomment code below for endless and commment code above
+                                    //current_customer = 0;
+                                }
+                                customers[current_customer] = new Customer(50,50,43,64,50,recipes);
 
+                            }
                         }
-                        }
-                }
+                    }
+                }     
+               
             }
         }
 
