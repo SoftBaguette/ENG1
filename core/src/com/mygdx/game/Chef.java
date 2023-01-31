@@ -29,15 +29,23 @@ public class Chef extends Person {
     public void move(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
              x -= 200 * Gdx.graphics.getDeltaTime();
+             // Border of 9px on the left (9 because of design choices, can be 0)
+             if (x < 9) {x = 9;}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
              x += 200 * Gdx.graphics.getDeltaTime();
+             // Border of 759px on the right (width - chef_width - 9)
+             if (x > 759) {x = 759;}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)){
-             y += 200 * Gdx.graphics.getDeltaTime();
+            y += 200 * Gdx.graphics.getDeltaTime();
+            // Border of 439px on the top (height - chef_height - 9)
+            if (y > 439) {y = 439;}
         }
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)){
-             y -= 200 * Gdx.graphics.getDeltaTime();
+            y -= 200 * Gdx.graphics.getDeltaTime();
+            // Border of 9 px on the bottom (430 for above serving station)
+             if (y < 9) {y = 9;}
         }
         // The hitbox needs to be updated everytime the chef moves
         hitbox.setPosition(x,y);
