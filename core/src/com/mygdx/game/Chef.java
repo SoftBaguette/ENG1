@@ -25,7 +25,6 @@ public class Chef extends Person {
     }
 
     // Allow the user to move the chef using the arrow keys and WASD keys
-    //TODO have boundaries
     public void move(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
              x -= 200 * Gdx.graphics.getDeltaTime();
