@@ -10,6 +10,8 @@ import org.json.simple.parser.*;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
     The station class is responsible for interacting with the chef to affect the cooking items
@@ -155,9 +157,22 @@ public class Station extends GameObject{
 
                 // If the top of chef's stack is valid for the current recipe
                 // add the item to the assembly station
+                //The set code below is used to make sure that only one of each item is added to the assembly station
+                Set<String> set_of_recipe_items = new HashSet<String>();
+                for (Item item :recipe.ingredients){
+                    set_of_recipe_items.add(item.name);
+                }
+                for (Item item: items_on_station){
+                    if (item != null){
+                        if (set_of_recipe_items.contains(item.name)){
+                            set_of_recipe_items.remove(item.name);
+                        }
+                    }
+
+                }
                 for (Item item : recipe.ingredients) {
                     if (chef.stack.isEmpty() != true){
-                        if (chef.stack.peak().name == item.name && chef.stack.peak().status == item.status){
+                        if (chef.stack.peak().name == item.name && chef.stack.peak().status == item.status && set_of_recipe_items.contains(item.name)){
                             items_on_station[++pointer] = chef.stack.pop();
                             if (pointer == 9){
                                 pointer = 0;
@@ -166,7 +181,7 @@ public class Station extends GameObject{
                         }
                     }
                 }
-                // TODO FIX this section
+                
                 // Check if all the items on the assembly station
                 // are right for the recipe
                 int items_ready = 0;
